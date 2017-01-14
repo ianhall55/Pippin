@@ -8,7 +8,6 @@ class ShowExceptions
   end
 
   def call(env)
-
     # render_exception(e)
     begin
       app.call(env)
