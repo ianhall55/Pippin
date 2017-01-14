@@ -1,0 +1,18 @@
+<h1>ALL THE CATS</h1>
+
+<% if flash[:notice] %>
+  Notice: <%= flash[:notice] %>
+<% end %>
+
+<pre>Cat Data: </pre>
+<ul>
+  <% @cats.each do |cat| %>
+    <li>
+      <h3>ID: <%= cat.id %></h3>
+      <h3>Name: <%= cat.name %></h3>
+      <h3>Owner ID: <%= cat.owner_id %></h3>
+    </li>
+  <% end %>
+
+</ul>
+<a href="/cats/new">New Cat!</a>
