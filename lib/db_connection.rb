@@ -15,6 +15,13 @@ class DBConnection
     @db
   end
 
+  def self.instance
+    # reset if @db.nil?
+    open(CATS_DB_FILE) if @db.nil?
+
+    @db
+  end
+
   # def self.reset
   #   debugger
   #   commands = [
@@ -25,13 +32,6 @@ class DBConnection
   #   commands.each { |command| `#{command}` }
   #   DBConnection.open(CATS_DB_FILE)
   # end
-
-  def self.instance
-    # reset if @db.nil?
-    open(CATS_DB_FILE) if @db.nil?
-
-    @db
-  end
 
   def self.execute(*args)
     print_query(*args)
