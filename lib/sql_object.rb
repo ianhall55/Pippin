@@ -116,14 +116,6 @@ class SQLObject
     self.id = id
   end
 
-#   UPDATE
-# table_name
-# SET
-# col1 = ?, col2 = ?, col3 = ?
-# WHERE
-# id = ?
-
-
   def update
     cols = self.class.columns
     col_names = cols[1..-1].map {|col| "#{col} = ?"}
@@ -141,7 +133,7 @@ class SQLObject
   end
 
   def save
-    
+
     self.id.nil? ? send(:insert) : send(:update)
   end
 end

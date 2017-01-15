@@ -1,55 +1,8 @@
 require 'rack'
-require_relative '../lib/controller_base.rb'
-require_relative '../lib/router'
-require_relative '../lib/sql_object'
+require_relative 'cats_controller'
 require_relative '../lib/show_exceptions'
 require_relative '../lib/static'
-# To test out your CSRF protection, go to the new cat form and
-# make sure it works! Alter the form_authenticity_token and see that
-# your server throws an error.
-
-class Cat < SQLObject
-  attr_reader :name, :owner
-
-end
-
-class Owner < SQLObject
-	belongs_to :house
-end
-
-class House < SQLObject
-	has_many :owners
-end
-
-class CatsController < ControllerBase
-  protect_from_forgery
-
-  def create
-    @cat = Cat.new(params["cat"])
-    if @cat.save
-      flash[:notice] = "Saved cat successfully"
-      redirect_to "/cats"
-    else
-      flash.now[:errors] = @cat.errors
-      render :new
-    end
-  end
-
-  def index
-    @cats = Cat.all
-    render :index
-  end
-
-  def new
-    @cat = Cat.new
-    render :new
-  end
-
-  def show
-    @cat = Cat.find(params["id"])
-    render :show
-  end
-end
+require_relative '../lib/router'
 
 router = Router.new
 router.draw do
@@ -57,10 +10,6 @@ router.draw do
   get Regexp.new("^/cats/new$"), CatsController, :new
   get Regexp.new("^/cats/(?<id>\\d+)$"), CatsController, :show
   post Regexp.new("^/cats$"), CatsController, :create
-  get Regexp.new("^/owners$"), CatsController, :index
-  get Regexp.new("^/owners/new$"), CatsController, :new
-  get Regexp.new("^/owners/(?<id>\\d+)$"), CatsController, :show
-  post Regexp.new("^/owners$"), CatsController, :create
 end
 
 app = Proc.new do |env|
