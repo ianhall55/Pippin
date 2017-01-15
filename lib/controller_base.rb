@@ -57,7 +57,6 @@ class ControllerBase
     render_content(html, 'text/html')
   end
 
-  # method exposing a `Session` object
   def session
     @session ||= Session.new(@req)
   end
@@ -72,7 +71,7 @@ class ControllerBase
       check_authenticity_token
     else
       form_authenticity_token
-    end 
+    end
 
     self.send(name.to_sym)
     render(name) unless already_built_response?
@@ -89,10 +88,10 @@ class ControllerBase
     unless auth_cookie && auth_cookie == params['authenticity_token']
       raise "Invalid authenticity token"
     end
-  end 
+  end
 
   def self.protect_from_forgery
     @@protect_from_forgery = true
-  end 
+  end
 
 end
