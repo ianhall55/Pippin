@@ -8,6 +8,27 @@ The below setup up is for an app included in the bin folder that demonstrates ho
 
 This app is built using a simple proc that listens for and responds to requests. It also includes the middleware to serve static files and display exceptions.
 
+```ruby
+app = Proc.new do |env|
+  req = Rack::Request.new(env)
+  res = Rack::Response.new
+
+  router.run(req, res)
+  res.finish
+end
+
+app = Rack::Builder.new do
+  use ShowExceptions
+  use Static
+  run app
+end.to_app
+
+Rack::Server.start(
+ app: app,
+ Port: 3000
+)
+```
+
 ![basic_app](./readme_photos/basic_app.png)
 
 ![app_setup](./readme_photos/app_setup.png)
