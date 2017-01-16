@@ -1,6 +1,6 @@
 # Pippin
 
-Pippin is a web application development framework written in Ruby, inspired by Rails.  The framework includes a controller base, a router, flash and session cookies, and middleware that display exceptions and serve static files similar to rails.  It also includes Object Relational Modeling similar to ORM that maps to a relational database (sqlite is used in demo).
+Pippin is a web application development framework written in Ruby, inspired by Rails.  The framework includes a controller base, a router, flash and session cookies, and middleware that display exceptions and serve static files similar to rails.  It also includes Object Relational Modeling similar to Active Record that maps to a relational database (sqlite is used in demo).
 
 The below setup up is for an app included in the bin folder that demonstrates how the framework can be set up and used.
 
